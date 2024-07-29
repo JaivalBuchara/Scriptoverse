@@ -1,35 +1,49 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 export default function TextForm(props) {
     const [text, setText] = useState("");
 
     const handleUpclick = () => {
-        let finaltext = text.toUpperCase()
-        setText(finaltext)
-        props.showAlert('CONVERTED TO UPPERCASE!', 'success')
+        let finaltext = text.toUpperCase();
+        setText(finaltext);
+        props.showAlert('CONVERTED TO UPPERCASE!', 'success');
     }
+
     const handleLoclick = () => {
-        let finaltext = text.toLowerCase()
-        setText(finaltext)
-        props.showAlert('converted to lowercase!', 'success')
+        let finaltext = text.toLowerCase();
+        setText(finaltext);
+        props.showAlert('converted to lowercase!', 'success');
     }
+
     const handleonChange = (event) => {
-        setText(event.target.value)
+        setText(event.target.value);
     }
+
     const handleCopyClick = () => {
-        navigator.clipboard.writeText(text)
-        props.showAlert('Copied to clipboard ', 'success')
+        navigator.clipboard.writeText(text);
+        props.showAlert('Copied to clipboard', 'success');
     }
-    const Removeextraspace = () =>{
-        let newText = text.split(/[ ]+/)
-        setText(newText.join([' ']))
-        props.showAlert('Space Removed ', 'success')
+
+    const Removeextraspace = () => {
+        let newText = text.split(/[ ]+/);
+        setText(newText.join(' '));
+        props.showAlert('Space Removed', 'success');
     }
-    const handleClearClick = (event) => {
-        setText("")
-        props.showAlert('Text cleared ', 'warning')
+
+    const handleClearClick = () => {
+        setText("");
+        props.showAlert('Text cleared', 'warning');
+    }
+
+    const handleSpeakClick = () => {
+        if ('speechSynthesis' in window) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            speechSynthesis.speak(utterance);
+            props.showAlert('Text-to-Speech Activated', 'success');
+        } else {
+            props.showAlert('Text-to-Speech not supported', 'danger');
+        }
     }
 
     return (
@@ -37,15 +51,14 @@ export default function TextForm(props) {
             <div className="container">
                 <h1>{props.heading}</h1>
                 <div className="mb-3">
-                    
                     <textarea
                         className="form-control"
                         id="myBox"
                         rows={8}
                         value={text}
-                        style={{backgroundColor: props.mode==='dark'?'#212529f7':'white',color: props.mode==='light'?'#212529f7':'white'}}
+                        style={{ backgroundColor: props.mode === 'dark' ? '#212529f7' : 'white', color: props.mode === 'light' ? '#212529f7' : 'white' }}
                         onChange={handleonChange}
-                        />
+                    />
                 </div>
                 <button className="btn btn-primary mx-2" onClick={handleUpclick}>
                     Convert to UpperCase
@@ -62,20 +75,23 @@ export default function TextForm(props) {
                 <button className="btn btn-primary mx-2" onClick={handleClearClick}>
                     Clear
                 </button>
+                <button className="btn btn-primary mx-2" onClick={handleSpeakClick}>
+                    Text-to-Speech
+                </button>
             </div>
             <div className="container my-4">
                 <h2>
                     Your Text Summary
                 </h2>
                 <p>
-                    {text.split(" ").filter ((element)=>{return element.length!==0}).length} words,{text.length} characters
+                    {text.split(" ").filter((element) => { return element.length !== 0 }).length} words, {text.length} characters
                 </p>
                 <p>
-                    Time taken to read : {0.008 * text.split(" ").length} min 
+                    Time taken to read : {0.008 * text.split(" ").length} min
                 </p>
             </div>
         </>
-    )
+    );
 }
 
 TextForm.propTypes = {

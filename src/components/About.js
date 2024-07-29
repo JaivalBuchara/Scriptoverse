@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 export default function About(props) {
 
     const [mystyle, setMystyle] = useState({
         color: 'black',
         backgroundColor: 'white',
+    });
 
-    })
-
-    const [dmtext,setDmtext] = useState('Enable Dark Mode')
+    const [dmtext, setDmtext] = useState('Enable Dark Mode');
 
     const dmtoggle = () => {
         if (mystyle.color === 'white') {
@@ -16,26 +15,25 @@ export default function About(props) {
                 color: 'black',
                 backgroundColor: 'white',
                 border: '1px solid white'
-            })
-            setDmtext('Enable Dark Mode')
+            });
+            setDmtext('Enable Dark Mode');
         } else {
             setMystyle({
                 color: 'white',
                 backgroundColor: 'black'
-            })
-            setDmtext('Enable Light Mode')
+            });
+            setDmtext('Enable Light Mode');
         }
     }
 
-
     return (
         <div className="container" style={mystyle}>
-            <h2 className='my-3' style={mystyle} >About Us</h2>
-            <div className="accordion" id="accordionExample" >
-                <div className="accordion-item" >
+            <h2 className='my-3' style={mystyle}>About Us</h2>
+            <div className="accordion" id="accordionExample">
+                <div className="accordion-item">
                     <h2 className="accordion-header">
                         <button
-                            className="accordion-button "
+                            className="accordion-button"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#collapseOne"
@@ -129,7 +127,6 @@ export default function About(props) {
                 <button type="button" className="btn btn-primary" onClick={dmtoggle}>
                     {dmtext}
                 </button>
-
             </div>
         </div>
     )

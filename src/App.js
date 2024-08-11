@@ -2,6 +2,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Alerts from './components/Alerts';
 import TextForm from './components/TextForm';
+import DiffTool from './components/DiffTool';
 import React, { useState } from 'react';
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
       <Alerts alert={alert} />
       <div className="container my-3">
         <TextForm heading="Please enter text below to analyze" mode={mode} showAlert={showAlert} />
+        <DiffTool showAlert={showAlert} />
       </div>
     </>
   );

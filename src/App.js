@@ -41,7 +41,7 @@ function App() {
 
   return (
     <Router>
-      <Navbar title="Text-Utils" mode={mode} toggleMode={toggleMode} />
+      <Navbar title="Scriptoverse" mode={mode} toggleMode={toggleMode} />
       <Alerts alert={alert} />
       <div className="container my-3">
         <Routes>
